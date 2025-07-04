@@ -1,0 +1,24 @@
+(define (checkDivisor n i)
+  (cond ((> i (sqrt n)) #t)                   ; i > Vn -> é primo
+        ((= (remainder n i) 0) #f)            ; se n % i == 0 (tal que o número só pode ser divisível por 1
+                                               ; e ele mesmo e a recursão começa com 2)
+                                               ;-> não é primo
+        (else (checkDivisor n (+ i 1)))))     ; recursão com i++ (próx. divisor)
+
+(define (ehPrimo? n)
+  (checkDivisor n 2)) ;Chama a função auxiliar de testar divisor
+
+(define (ehPar? x)
+  (= (remainder x 2) 0)) ; Retorna x % 2 == 0 
+
+(define (ehImpar? x)
+  (not (= (remainder x 2) 0))) ; Retorna x % 2 != 0 
+
+(define (classificarNumeros numeros)
+  (define pares (filter ehPar? numeros))
+  (define impares (filter ehImpar? numeros))
+  (define primos (filter ehPrimo? numeros))
+  (list pares impares primos)) ;Retorna uma list com 3 listas "filtradas"
+(classificarNumeros '(1 2 3 4 5 6 7 8 9 14120 1121 13 15)) ;' indica que é uma lista de ;argumentos
+
+;para output visual usar ‘write ( (...))’
