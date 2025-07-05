@@ -10,7 +10,7 @@ class BaseConverter:
         for digit in reversed(number):
             value = self.digits.index(digit)
             if value >= base:
-                raise ValueError(f"Dígito '{digit}' inválido para base {base}")
+                raise ValueError(f"Digit '{digit}' is invalid for base {base}")
             decimal += value * (base ** power)
             power += 1
         return decimal
@@ -35,21 +35,22 @@ if __name__ == "__main__":
     converter = BaseConverter()
 
     while True:
-        print("\n=== Conversor de Bases Numéricas ===")
-        num = input("Digite o número (ou 'sair' para encerrar): ")
-        if num.lower() == "sair":
+        print("\n╔═══════════════════════════════════════════════════╗\n║ Number Base Converter")
+        num = input("║ Enter the number (or 'QUIT' to quit): ")
+        if num.lower() == "quit":
             break
 
         try:
-            from_base = int(input("Base de origem (2-16): "))
-            to_base = int(input("Base de destino (2-16): "))
-            if not (2 <= from_base <= 16) or not (2 <= to_base <= 16):	
-                print("As bases devem estar entre 2 e 16.")
+            from_base = int(input("║ From base (2-16): "))
+            to_base = int(input("║ To base (2-16): "))
+            if not (2 <= from_base <= 16) or not (2 <= to_base <= 16):
+                print("║ Bases must be between 2 and 16.")
                 continue
 
             result = converter.convert(num, from_base, to_base)
-            print(f"{num} (base {from_base}) → {result} (base {to_base})")
+            print(f"║ {num} (base {from_base}) → {result} (base {to_base})")
 
         except ValueError as e:
-            print("Erro:", e)
+            print("Error:", e)
 
+        print("╚═══════════════════════════════════════════════════╝")
